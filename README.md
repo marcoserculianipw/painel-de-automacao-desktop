@@ -1,151 +1,54 @@
 # Painel de Automação Desktop
 
-[![Plataforma](https://img.shields.io/badge/plataforma-Windows%2010%20%7C%2011-0078D4.svg)](https://www.microsoft.com/windows)
-[![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-5391FE.svg)](https://learn.microsoft.com/powershell/)
-[![Interface](https://img.shields.io/badge/UI-WPF%20XAML-252525.svg)](https://learn.microsoft.com/dotnet/desktop/wpf/)
-[![Licença](https://img.shields.io/badge/licença-MIT-green.svg)](LICENSE)
+Aplicação desktop em PowerShell e interface WPF para inicialização em lote de rotinas de trabalho no Windows.
 
-Aplicação desktop leve desenvolvida em PowerShell e Windows Presentation Foundation (WPF) para automação e inicialização ordenada de rotinas de trabalho no Windows 11.
+## Sobre o projeto
 
----
-
-## Visão Geral
-
-O projeto automatiza o processo de abertura de ferramentas corporativas e ambientes de trabalho diários (planilhas Google Sheets, Microsoft Outlook, Microsoft Teams, WhatsApp Desktop, sistemas web e ferramentas locais).
-
-Diferente de alternativas empacotadas com Electron ou navegadores embarcados, a aplicação é executada de forma nativa sobre o subsistema WPF do Windows:
-- Não requer instalação de interpretadores ou runtimes de terceiros (como Node.js ou Python).
-- Consumo mínimo de recursos (~35 MB de memória em execução).
-- Interface declarativa em XAML seguindo os padrões do Windows 11 (modo escuro, cantos arredondados e tipografia Segoe UI Variable).
-- Execução desacoplada via VBScript, eliminando a exibição de janelas de console do prompt de comando.
-
----
+Criei este painel para automatizar o início do meu próprio expediente de trabalho no computador, reunindo em uma única interface a abertura ordenada de ferramentas diárias (planilhas do Google Sheets, Microsoft Outlook, Teams, WhatsApp e pastas locais). Como utiliza os recursos nativos do Windows (PowerShell e WPF), a ferramenta roda diretamente sem necessidade de instalar interpretadores pesados como Node.js ou Python.
 
 ## Funcionalidades
 
-- **Inicialização em lote ordenada:** Lançamento sequencial de programas e links com intervalo de tempo configurável para evitar sobrecarga de I/O.
-- **Seleção granular de rotina:** Cada item possui controle de estado (Abrir / Pular) para permitir a execução parcial conforme a demanda do dia.
-- **Ações rápidas de seleção:** Botões para seleção e desseleção em lote com atualização dinâmica de contadores.
-- **Prevenção de processos duplicados:** Verificação prévia de instâncias em execução antes do disparo de novos processos.
-- **Integração com Google Chrome:** Abertura sequencial de planilhas e URLs em abas organizadas do navegador.
-- **Gerenciador de recursos integrado:**
-  - Interface para cadastro de novos itens (Planilhas, URLs, Executáveis e Pastas).
-  - Remoção direta de itens da rotina.
-- **Painel de preferências:**
-  - Configuração do nome do operador.
-  - Formato de saudação (automático por período do dia ou mensagem customizada).
-  - Paleta de cores de destaque (Azul Windows, Verde Office, Roxo e Cinza Grafite).
-  - Comportamento de encerramento pós-inicialização.
-- **Modo CLI / Headless:** Script complementar (`iniciar.ps1`) para execução silenciosa em pipelines ou Agendador de Tarefas do Windows.
+- Inicialização sequencial de aplicativos, pastas e links com intervalo configurável para evitar travamentos
+- Seleção individual de itens: controle para marcar ou desmarcar o que deseja abrir naquele dia
+- Prevenção de duplicidade: checagem de instâncias antes de disparar novos processos
+- Cadastro e exclusão de novos itens (links, planilhas, programas e pastas) diretamente pela interface
+- Painel de preferências: personalização do nome do operador, mensagem de saudação e cores de destaque
+- Modo silencioso (CLI): script auxiliar (`iniciar.ps1`) para execução sem interface via terminal ou Agendador de Tarefas do Windows
 
----
+## Tecnologias
+
+- Windows PowerShell (lógica de automação e controle de processos)
+- WPF / XAML (interface gráfica nativa)
+- JSON (`config.json` para persistência dos itens e preferências)
+- VBScript (script auxiliar para disparo em segundo plano sem janela preta de console)
 
 ## Requisitos
 
-- Windows 10 ou Windows 11 (64-bit)
-- Windows PowerShell 5.1 ou superior (nativo do sistema operacional)
+- Windows 10 ou Windows 11
+- PowerShell 5.1 ou superior (já integrado ao Windows)
 - Google Chrome (recomendado para links de planilhas)
 
----
+## Como usar
 
-## Instalação e Execução
-
-### 1. Clonar o repositório
+1. Clone o repositório:
 ```bash
 git clone https://github.com/marcoserculianipw/painel-de-automacao-desktop.git
+cd painel-de-automacao-desktop
 ```
-
-### 2. Gerar o atalho da Área de Trabalho
-Execute o instalador auxiliar de atalho:
+2. Crie o atalho na Área de Trabalho executando o arquivo:
 ```cmd
 Criar_Atalho_Area_de_Trabalho.bat
 ```
-O atalho `iniciartudo` será gerado automaticamente na Área de Trabalho com o ícone do sistema.
+3. Abra o atalho gerado, selecione os programas desejados e clique em **Iniciar rotina de trabalho**.
 
-### 3. Utilização
-- Dê um duplo clique no atalho `iniciartudo`.
-- Ajuste os itens que deseja iniciar no painel.
-- Clique em **Iniciar rotina de trabalho**.
-
----
-
-## Estrutura do Repositório
+## Estrutura de arquivos
 
 ```text
-├── minipainel.ps1                   # Interface gráfica principal em WPF e motor de eventos
-├── config.json                      # Configurações do usuário e relação de itens cadastrados
-├── config.example.json              # Modelo de configuração para referência
-├── iniciar.ps1                      # Executor de linha de comando para automação headless
-├── iniciar_tudo.vbs                 # Wrapper de execução silenciosa (SW_HIDE)
-├── iniciar_tudo.bat                 # Script de inicialização auxiliar
-├── criar_atalho.ps1                 # Gerador do atalho .lnk via WScript.Shell
-├── Criar_Atalho_Area_de_Trabalho.bat # Script batch de disparo para criação do atalho
-├── .gitignore                       # Filtro de arquivos locais e temporários
-└── assets/                          # Recursos visuais e logotipos em alta definição
-    ├── sheets.png
-    ├── outlook.png
-    ├── teams.png
-    ├── whatsapp.png
-    ├── chrome.png
-    └── folder.png
+├── minipainel.ps1                   # Interface gráfica em WPF e execução dos disparos
+├── config.json                      # Itens cadastrados e preferências do usuário
+├── config.example.json              # Modelo padrão de configuração
+├── iniciar.ps1                      # Execução via linha de comando (modo headless)
+├── iniciar_tudo.vbs                 # Inicialização sem janela de console visível
+├── iniciar_tudo.bat                 # Script batch auxiliar de disparo
+└── criar_atalho.ps1                 # Gerador do atalho na Área de Trabalho
 ```
-
----
-
-## Formato de Configuração (`config.json`)
-
-As definições da aplicação residem em `config.json`. A estrutura suporta os tipos `url`, `app` e `folder`:
-
-```json
-{
-  "user": {
-    "name": "Marcos",
-    "greetingType": "auto",
-    "customGreeting": "",
-    "closeAfterLaunch": true,
-    "accentColor": "#0067C0"
-  },
-  "settings": {
-    "delaySeconds": 0.8,
-    "preventDuplicates": true
-  },
-  "items": [
-    {
-      "id": "planilha_exemplo",
-      "name": "Planilha de Agendamento",
-      "category": "Planilha",
-      "type": "url",
-      "target": "https://docs.google.com/spreadsheets/d/SEU_ID_AQUI",
-      "processName": "",
-      "args": "",
-      "enabled": true
-    },
-    {
-      "id": "outlook",
-      "name": "Microsoft Outlook",
-      "category": "E-mail",
-      "type": "app",
-      "target": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE",
-      "processName": "OUTLOOK",
-      "args": "",
-      "enabled": true
-    },
-    {
-      "id": "whatsapp",
-      "name": "WhatsApp",
-      "category": "Mensagens",
-      "type": "app",
-      "target": "whatsapp:",
-      "processName": "",
-      "args": "",
-      "enabled": true
-    }
-  ]
-}
-```
-
----
-
-## Licença
-
-Distribuído sob a licença [MIT](LICENSE). Consulte o arquivo para mais informações.
