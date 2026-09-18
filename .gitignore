@@ -1,0 +1,19 @@
+# Configuracoes e rotinas locais (privativo)
+config.json
+
+# Logs e arquivos temporarios
+*.log
+*.tmp
+
+# Cache do Sistema Operacional
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Atalhos locais da Area de Trabalho
+*.lnk
+
+# Editores e IDEs
+.vscode/
+.idea/

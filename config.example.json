@@ -1,0 +1,55 @@
+{
+    "user": {
+        "name": "Seu Nome",
+        "greetingType": "auto",
+        "customGreeting": "",
+        "closeAfterLaunch": true,
+        "accentColor": "#0067C0"
+    },
+    "settings": {
+        "delaySeconds": 0.8,
+        "preventDuplicates": true
+    },
+    "items": [
+        {
+            "id": "planilha_exemplo",
+            "name": "Planilha de Trabalho",
+            "category": "Planilha",
+            "type": "url",
+            "target": "https://docs.google.com/spreadsheets/d/SEU_LINK_AQUI",
+            "processName": "",
+            "args": "",
+            "enabled": true
+        },
+        {
+            "id": "outlook",
+            "name": "Microsoft Outlook",
+            "category": "E-mail",
+            "type": "app",
+            "target": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE",
+            "processName": "OUTLOOK",
+            "args": "",
+            "enabled": true
+        },
+        {
+            "id": "teams",
+            "name": "Microsoft Teams",
+            "category": "Comunicação",
+            "type": "app",
+            "target": "msteams:",
+            "processName": "ms-teams*",
+            "args": "",
+            "enabled": true
+        },
+        {
+            "id": "whatsapp",
+            "name": "WhatsApp",
+            "category": "Mensagens",
+            "type": "app",
+            "target": "whatsapp:",
+            "processName": "",
+            "args": "",
+            "enabled": true
+        }
+    ]
+}
