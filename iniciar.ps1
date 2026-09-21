@@ -1,4 +1,4 @@
-# Execucao em linha de comando / rotina em lote
+﻿# Execucao em linha de comando / rotina em lote
 param(
     [string]$SingleId = "",
     [switch]$NoDelay

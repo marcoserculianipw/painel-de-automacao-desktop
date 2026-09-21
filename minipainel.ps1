@@ -1,4 +1,4 @@
-# Painel de Automacao Desktop
+﻿# Painel de Automacao Desktop
 # Interface Windows 11 Fluent WPF
 Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase, System.Drawing
 
