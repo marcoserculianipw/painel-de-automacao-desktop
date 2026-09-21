@@ -569,7 +569,7 @@ function Get-RealIconPath($item) {
     $nameLower = ($item.name + " " + $item.category).ToLower()
     $targetLower = ($item.target).ToLower()
 
-    if ($nameLower -match "fiel|transatila|planilha|sheet" -or $targetLower -match "spreadsheets|docs.google") {
+    if ($nameLower -match "planilha|sheet|tabela" -or $targetLower -match "spreadsheets|docs.google") {
         return (Join-Path $assetsDir "sheets.png")
     }
     if ($nameLower -match "outlook|e-mail|email" -or $targetLower -match "outlook") {
@@ -588,7 +588,7 @@ function Get-ItemSubtitle($item) {
     $nameLower = ($item.name + " " + $item.category).ToLower()
     $targetLower = ($item.target).ToLower()
 
-    if ($nameLower -match "fiel|transatila|planilha|sheet" -or $targetLower -match "spreadsheets") {
+    if ($nameLower -match "planilha|sheet|tabela" -or $targetLower -match "spreadsheets") {
         return "Google Sheets • Google Chrome"
     }
     if ($nameLower -match "outlook") {
